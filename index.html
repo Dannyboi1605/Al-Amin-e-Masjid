@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al-Amin E-Masjid</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <h1>Al-Amin E-Masjid</h1>
+    <nav>
+      <div class="burger" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul id="nav-list">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Announcements</a></li>
+        <li><a href="#">Prayer Times</a></li>
+        <li><a href="#">Donations</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Volunteer</a></li>
+      </ul>
+    </nav>
+    <div class="prayer-bar">
+      <span><strong>Subuh:</strong> 5:15 AM</span>
+      <span><strong>Zohor:</strong> 12:30 PM</span>
+      <span><strong>Asar:</strong> 4:00 PM</span>
+      <span><strong>Maghrib:</strong> 6:25 PM</span>
+      <span><strong>Isyak:</strong> 7:45 PM</span>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Welcome to Al-Amin E-Masjid</h2>
+    <p>Connecting the community through faith, events, and service.</p>
+  </section>
+
+  <!-- Announcements -->
+  <section>
+    <h3>Latest Announcements</h3>
+    <div class="card">
+      <h4>Weekly Friday Prayer</h4>
+      <p>Date: 12 September 2025 | Time: 12:30 PM</p>
+      <p>Join us for Jumaat prayers and khutbah by Ustaz Ahmad.</p>
+    </div>
+    <div class="card">
+      <h4>Donation Drive for Orphans</h4>
+      <p>Help support the community by donating online or at the mosque office.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Masjid Al-Amin, Kampung Serigai, Putatan, Sabah</p>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navList = document.getElementById('nav-list');
+    burger.addEventListener('click', function() {
+      navList.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
