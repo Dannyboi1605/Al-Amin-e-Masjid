@@ -14,6 +14,7 @@ if (!isset($_SESSION['admin'])) {
   <h2>Welcome, <?php echo $_SESSION['admin']; ?>!</h2>
   <ul>
     <li><a href="announcements.php">Manage Announcements</a></li>
+    <li><a href="events.php">Manage Events</a></li>
     <li><a href="donations.php">View Donations</a></li>
     <li><a href="volunteers.php">View Volunteers</a></li>
     <li><a href="gallery.php">Manage Gallery</a></li>
