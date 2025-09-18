@@ -1,13 +1,20 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Al-Amin E-Masjid</title>
+  <title>Contact - Al-Amin E-Masjid</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
+    <?php include("includes/navbar.php"); ?>
   <!-- Navbar -->
   <header>
     <h1>Al-Amin E-Masjid</h1>
@@ -36,23 +43,33 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h2>Welcome to Al-Amin E-Masjid</h2>
-    <p>Connecting the community through faith, events, and service.</p>
-  </section>
-
-  <!-- Announcements -->
-  <section>
-    <h3>Latest Announcements</h3>
+  <!-- Contact Section -->
+  <section class="container">
+    <h2>Contact Us</h2>
     <div class="card">
-      <h4>Weekly Friday Prayer</h4>
-      <p>Date: 12 September 2025 | Time: 12:30 PM</p>
-      <p>Join us for Jumaat prayers and khutbah by Ustaz Ahmad.</p>
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
     </div>
-    <div class="card">
-      <h4>Donation Drive for Orphans</h4>
-      <p>Help support the community by donating online or at the mosque office.</p>
+
+    <!-- Mosque Info -->
+    <div class="card info">
+      <h3>Masjid Al-Amin</h3>
+      <p><strong>Address:</strong> Kampung Serigai, Putatan, Sabah</p>
+      <p><strong>Email:</strong> info@alaminemasjid.my</p>
+      <p><strong>Phone:</strong> +60 12-345 6789</p>
     </div>
   </section>
 

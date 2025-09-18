@@ -22,5 +22,18 @@ if (!isset($_SESSION['admin'])) {
     <li><a href="users.php">Users</a></li>
     <li><a href="logout.php">Logout</a></li>
   </ul>
+  <nav>
+    <ul>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="about.php">About</a></li>
+      <li><a href="announcements.php">Announcements</a></li>
+      <li><a href="donations.php">Donations</a></li>
+      <li><a href="volunteer.php">Volunteer</a></li>
+      <li><a href="gallery.php">Gallery</a></li>
+      <li><a href="contact.php">Contact</a></li>
+    </ul>
+  </nav>
+  <!-- Example internal link -->
+  <a href="volunteer.php">Become a Volunteer</a>
 </body>
 </html>

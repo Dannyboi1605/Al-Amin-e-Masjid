@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +14,9 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <header>
+    <?php include("includes/navbar.php"); ?>
+    <!-- Navbar -->
+    <header>
     <h1>Al-Amin E-Masjid</h1>
     <nav>
       <ul>

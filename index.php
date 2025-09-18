@@ -1,15 +1,22 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Announcements - Al-Amin E-Masjid</title>
+  <title>Al-Amin E-Masjid</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-  <!-- Navbar -->
-  <header>
+    <?php include("includes/navbar.php"); ?>
+    <!-- Navbar -->
+    <header>
     <h1>Al-Amin E-Masjid</h1>
     <nav>
       <div class="burger" id="burger">
@@ -36,28 +43,24 @@
     </div>
   </header>
 
-  <!-- Announcements -->
-  <section class="container">
-    <h2>Latest Announcements</h2>
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Welcome to Al-Amin E-Masjid</h2>
+    <p>Connecting the community through faith, events, and service.</p>
+  </section>
 
+  <!-- Announcements -->
+  <section>
+    <h3>Latest Announcements</h3>
     <div class="card">
       <h4>Weekly Friday Prayer</h4>
-      <div class="date">📅 12 September 2025 | 🕐 12:30 PM</div>
-      <p>Join us for Jumaat prayers and khutbah by Ustaz Ahmad at Masjid Al-Amin.</p>
+      <p>Date: 12 September 2025 | Time: 12:30 PM</p>
+      <p>Join us for Jumaat prayers and khutbah by Ustaz Ahmad.</p>
     </div>
-
     <div class="card">
       <h4>Donation Drive for Orphans</h4>
-      <div class="date">📅 Ongoing Campaign</div>
-      <p>Support the community by contributing to our monthly charity drive for orphans and families in need.</p>
+      <p>Help support the community by donating online or at the mosque office.</p>
     </div>
-
-    <div class="card">
-      <h4>Community Gotong-Royong</h4>
-      <div class="date">📅 20 September 2025 | 🕐 8:00 AM</div>
-      <p>All are welcome to join us for a mosque cleaning and community service event. Breakfast will be provided.</p>
-    </div>
-
   </section>
 
   <!-- Footer -->

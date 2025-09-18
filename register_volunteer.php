@@ -1,5 +1,11 @@
 <?php
+session_start();
 include("config/db.php");
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php?msg=Please log in first to continue.");
+    exit();
+}
 
 if (!isset($_GET['event_id'])) {
     echo "Invalid event.";
@@ -24,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Register as Volunteer</title>
 </head>
 <body>
+    <?php include("includes/navbar.php"); ?>
     <h2>Register as Volunteer for "<?php echo htmlspecialchars($event['title']); ?>"</h2>
     <form method="POST" action="">
         <label>Name:</label><br>

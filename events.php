@@ -24,6 +24,7 @@ function show_events($conn, $status, $heading) {
     <title>Events</title>
 </head>
 <body>
+    <?php include("includes/navbar.php"); ?>
     <h2>Events</h2>
     <?php
     show_events($conn, 'upcoming', 'Upcoming Events');
