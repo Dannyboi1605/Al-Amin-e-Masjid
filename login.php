@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_name'] = $row['name'];
             $_SESSION['user_role'] = $row['role'];
 
+
             // Redirect based on role
             if ($row['role'] === 'admin') {
                 header("Location: admin/dashboard.php");
@@ -93,18 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     .login-container input[type="submit"]:hover {
         background: #0056b3;
     }
-    .eye-icon {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        width: 22px;
-        height: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
     .login-container .register-link {
         text-align: center;
         margin-top: 18px;
@@ -124,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 <body>
-    <?php include("includes/navbar.php"); ?>
+
 
     <div class="login-container">
         <h2>Login</h2>
@@ -142,14 +131,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email" required>
 
             <label>Password:</label>
-            <div style="position:relative;">
-                <input type="password" name="password" id="password" required>
-                <span class="eye-icon" onclick="togglePassword()">
-                    <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="gray" viewBox="0 0 16 16">
-                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zm-8 4a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-                    </svg>
-                </span>
-            </div>
+            <input type="password" name="password" id="password" required>
+            <label style="display:block; margin-top:8px;">
+                <input type="checkbox" onclick="togglePassword()"> Show Password
+            </label>
+            <br><br>
 
             <input type="submit" value="Login">
         </form>
@@ -160,15 +146,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script>
     function togglePassword() {
         var pwd = document.getElementById('password');
-        var icon = document.getElementById('eyeIcon');
-        if (pwd.type === "password") {
-            pwd.type = "text";
-            icon.style.fill = "#007bff";
-        } else {
-            pwd.type = "password";
-            icon.style.fill = "gray";
-        }
+        pwd.type = pwd.type === "password" ? "text" : "password";
     }
+    </script>
+</body>
+</html>
+<?php ob_end_flush(); ?>
+
+        
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.togglePassword = function() {
+            var pwd = document.getElementById('password');
+            var icon = document.getElementById('eyeIcon');
+            if (pwd.type === "password") {
+                pwd.type = "text";
+                icon.style.fill = "#007bff";
+            } else {
+                pwd.type = "password";
+                icon.style.fill = "gray";
+            }
+        }
+    });
     </script>
 </body>
 </html>

@@ -1,7 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
+
+// Allow access only if user is logged in AND has role 'admin'
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+    header("Location: ../login.php");
     exit();
 }
 ?>
@@ -11,7 +13,7 @@ if (!isset($_SESSION['admin'])) {
   <title>Admin Dashboard</title>
 </head>
 <body>
-  <h2>Welcome, <?php echo $_SESSION['admin']; ?>!</h2>
+  <h2>Welcome, <?php echo $_SESSION['user_name']; ?>!</h2>
   <ul>
     <li><a href="announcements.php">Manage Announcements</a></li>
     <li><a href="events.php">Manage Events</a></li>

@@ -26,23 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->num_rows > 0) {
             $error = "Email is already registered.";
         } else {
-            // Hash password
+            // Hash the password before inserting
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            // Insert new user with default role = 'user'
             $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'user')");
             $stmt->bind_param("sss", $name, $email, $hashed_password);
 
             if ($stmt->execute()) {
-                // Auto login after registration
-                $_SESSION['user_id'] = $stmt->insert_id;
-                $_SESSION['user_name'] = $name;
-                $_SESSION['user_role'] = 'user';
-
-                header("Location: index.php");
+                header("Location: login.php?msg=Registration successful. Please login.");
                 exit();
             } else {
-                $error = "Registration failed. Please try again.";
+                echo "Error: " . $stmt->error;
             }
         }
 
@@ -54,6 +48,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Register</title>
+    <style>
+    .password-toggle {
+        position: relative;
+        width: 250px;
+    }
+    .password-toggle input {
+        width: 100%;
+        padding-right: 36px; /* space for the icon */
+    }
+    .eye-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        width: 22px;
+        height: 22px;
+    }
+    </style>
 </head>
 <body>
     <?php include("includes/navbar.php"); ?>
@@ -72,16 +85,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="email" required><br><br>
 
         <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+        <input type="password" name="password" id="password" required>
+        <label style="display:block; margin-top:8px;">
+            <input type="checkbox" onclick="togglePassword('password')"> Show Password
+        </label>
+        <br><br>
 
         <label>Confirm Password:</label><br>
-        <input type="password" name="confirm_password" required><br><br>
+        <input type="password" name="confirm_password" id="confirm_password" required>
+        <label style="display:block; margin-top:8px;">
+            <input type="checkbox" onclick="togglePassword('confirm_password')"> Show Password
+        </label>
+        <br><br>
 
         <input type="submit" value="Register">
     </form>
 
     <br>
     <a href="login.php">Already have an account? Login</a>
+
+    <script>
+    function togglePassword(id) {
+        var pwd = document.getElementById(id);
+        pwd.type = pwd.type === "password" ? "text" : "password";
+    }
+    </script>
+</body>
+</html>
+<?php ob_end_flush(); ?>
+ 
+    </script>
 </body>
 </html>
 <?php ob_end_flush(); ?>
