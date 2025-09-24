@@ -1,13 +1,22 @@
 <?php
 session_start();
+include("config/db.php"); // Database connection
 
-// Check if user is logged in
+// Check if user is logged in (optional - remove if homepage should be public)
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
+    // header("Location: login.php");
+    // exit();
 }
-?>
 
+// Fetch homepage settings (hero text etc.)
+$hero_query = "SELECT * FROM homepage_settings LIMIT 1";
+$hero_result = mysqli_query($conn, $hero_query);
+$hero = mysqli_fetch_assoc($hero_result);
+
+// Fetch latest announcements
+$announcements_query = "SELECT * FROM announcements ORDER BY created_at DESC LIMIT 3";
+$announcements_result = mysqli_query($conn, $announcements_query);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,52 +28,31 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
     <?php include("includes/navbar.php"); ?>
-    <!-- Navbar -->
-    <header>
-    <h1>Al-Amin E-Masjid</h1>
-    <nav>
-      <div class="burger" id="burger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul id="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="announcements.html">Announcements</a></li>
-        <li><a href="donation.html">Donations</a></li>
-        <li><a href="contact.html">Contact</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="volunteer.html">Volunteer</a></li>
-      </ul>
-    </nav>
-    <div class="prayer-bar">
-      <span><strong>Subuh:</strong> 5:15 AM</span>
-      <span><strong>Zohor:</strong> 12:30 PM</span>
-      <span><strong>Asar:</strong> 4:00 PM</span>
-      <span><strong>Maghrib:</strong> 6:25 PM</span>
-      <span><strong>Isyak:</strong> 7:45 PM</span>
-    </div>
-  </header>
 
   <!-- Hero -->
   <section class="hero">
-    <h2>Welcome to Al-Amin E-Masjid</h2>
-    <p>Connecting the community through faith, events, and service.</p>
+    <h2><?php echo $hero['title'] ?? "Welcome to Al-Amin E-Masjid"; ?></h2>
+    <p><?php echo $hero['subtitle'] ?? "Connecting the community through faith, events, and service."; ?></p>
   </section>
 
   <!-- Announcements -->
   <section>
     <h3>Latest Announcements</h3>
-    <div class="card">
-      <h4>Weekly Friday Prayer</h4>
-      <p>Date: 12 September 2025 | Time: 12:30 PM</p>
-      <p>Join us for Jumaat prayers and khutbah by Ustaz Ahmad.</p>
-    </div>
-    <div class="card">
-      <h4>Donation Drive for Orphans</h4>
-      <p>Help support the community by donating online or at the mosque office.</p>
-    </div>
+    <?php while ($row = mysqli_fetch_assoc($announcements_result)) { ?>
+      <div class="card">
+        <h4><?php echo htmlspecialchars($row['title']); ?></h4>
+        <p><strong>Date:</strong> <?php echo date("d M Y", strtotime($row['event_date'])); ?></p>
+        <p><?php echo htmlspecialchars($row['content']); ?></p>
+        <a href="announcement_details.php?id=<?php echo $row['id']; ?>">Read more</a>
+      </div>
+    <?php } ?>
+  </section>
+
+  <!-- Donations -->
+  <section>
+    <h3>Support the Mosque</h3>
+    <p>Your donations help us run programs and maintain the mosque.</p>
+    <a href="donations.php" class="btn-donate">Donate Now</a>
   </section>
 
   <!-- Footer -->
@@ -75,7 +63,7 @@ if (!isset($_SESSION['user_id'])) {
   <script>
     const burger = document.getElementById('burger');
     const navList = document.getElementById('nav-list');
-    burger.addEventListener('click', function() {
+    burger?.addEventListener('click', function() {
       navList.classList.toggle('active');
     });
   </script>

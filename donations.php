@@ -17,33 +17,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
 </head>
 <body>
     <?php include("includes/navbar.php"); ?>
-    <!-- Navbar -->
-    <header>
-    <h1>Al-Amin E-Masjid</h1>
-    <nav>
-      <div class="burger" id="burger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul id="nav-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="announcements.html">Announcements</a></li>
-        <li><a href="donation.html">Donations</a></li>
-        <li><a href="contact.html">Contact</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="volunteer.html">Volunteer</a></li>
-      </ul>
-    </nav>
-    <div class="prayer-bar">
-      <span><strong>Subuh:</strong> 5:15 AM</span>
-      <span><strong>Zohor:</strong> 12:30 PM</span>
-      <span><strong>Asar:</strong> 4:00 PM</span>
-      <span><strong>Maghrib:</strong> 6:25 PM</span>
-      <span><strong>Isyak:</strong> 7:45 PM</span>
-    </div>
-  </header>
 
   <!-- Donations Section -->
   <section class="container">
@@ -86,6 +59,33 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
             <option value="cash">Cash</option>
             <option value="transfer">Bank Transfer</option>
           </select>
+        </div>
+        <button type="submit" class="donate-btn">Donate Now</button>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Bank Details</h3>
+      <p><strong>Bank Name:</strong> Maybank</p>
+      <p><strong>Account No:</strong> 1234567890</p>
+      <p><strong>Account Name:</strong> Masjid Al-Amin</p>
+      <p>For bank transfer, please email your receipt to <a href="mailto:info@masjidalamin.com">info@masjidalamin.com</a>.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Masjid Al-Amin, Kampung Serigai, Putatan, Sabah</p>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navList = document.getElementById('nav-list');
+    burger.addEventListener('click', function() {
+      navList.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
         </div>
         <button type="submit" class="donate-btn">Donate Now</button>
       </form>

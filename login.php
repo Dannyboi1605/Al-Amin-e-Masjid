@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_regenerate_id(true); // Prevent session fixation
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_name'] = $row['name'];
-            $_SESSION['user_role'] = $row['role'];
+            $_SESSION['role'] = $row['role'];
 
 
             // Redirect based on role

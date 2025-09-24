@@ -1,6 +1,12 @@
 <?php
+session_start();
 include("config/db.php");
+
+// Fetch all announcements
+$query = "SELECT * FROM announcements ORDER BY created_at DESC";
+$result = mysqli_query($conn, $query);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,71 +16,27 @@ include("config/db.php");
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <?php include("includes/navbar.php"); ?>
-  <!-- Announcements -->
+  <?php include("includes/navbar.php"); ?>
+
   <section class="container">
-    <h2>Latest Announcements</h2>
+    <h2>All Announcements</h2>
 
-    <div class="card">
-      <h4>Weekly Friday Prayer</h4>
-      <div class="date">📅 12 September 2025 | 🕐 12:30 PM</div>
-      <p>Join us for Jumaat prayers and khutbah by Ustaz Ahmad at Masjid Al-Amin.</p>
-    </div>
-
-    <div class="card">
-      <h4>Donation Drive for Orphans</h4>
-      <div class="date">📅 Ongoing Campaign</div>
-      <p>Support the community by contributing to our monthly charity drive for orphans and families in need.</p>
-    </div>
-
-    <div class="card">
-      <h4>Community Gotong-Royong</h4>
-      <div class="date">📅 20 September 2025 | 🕐 8:00 AM</div>
-      <p>All are welcome to join us for a mosque cleaning and community service event. Breakfast will be provided.</p>
-    </div>
-
+    <?php if (mysqli_num_rows($result) > 0): ?>
+      <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+        <div class="card">
+          <h3><?php echo htmlspecialchars($row['title']); ?></h3>
+          <p><strong>Date:</strong> <?php echo date("d M Y", strtotime($row['event_date'])); ?></p>
+          <p><?php echo nl2br(htmlspecialchars(substr($row['content'], 0, 200))); ?>...</p>
+          <a href="announcement_details.php?id=<?php echo $row['id']; ?>">Read more</a>
+        </div>
+      <?php } ?>
+    <?php else: ?>
+      <p>No announcements available at the moment.</p>
+    <?php endif; ?>
   </section>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Masjid Al-Amin, Kampung Serigai, Putatan, Sabah</p>
   </footer>
-
-  <script>
-    const burger = document.getElementById('burger');
-    const navList = document.getElementById('nav-list');
-    burger.addEventListener('click', function() {
-      navList.classList.toggle('active');
-    });
-  </script>
 </body>
 </html>
-    <div class="card">
-      <h4>Donation Drive for Orphans</h4>
-      <div class="date">📅 Ongoing Campaign</div>
-      <p>Support the community by contributing to our monthly charity drive for orphans and families in need.</p>
-    </div>
-
-    <div class="card">
-      <h4>Community Gotong-Royong</h4>
-      <div class="date">📅 20 September 2025 | 🕐 8:00 AM</div>
-      <p>All are welcome to join us for a mosque cleaning and community service event. Breakfast will be provided.</p>
-    </div>
-
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Masjid Al-Amin, Kampung Serigai, Putatan, Sabah</p>
-  </footer>
-
-  <script>
-    const burger = document.getElementById('burger');
-    const navList = document.getElementById('nav-list');
-    burger.addEventListener('click', function() {
-      navList.classList.toggle('active');
-    });
-  </script>
-</body>
-</html>
-

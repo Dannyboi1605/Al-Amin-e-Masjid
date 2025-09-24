@@ -1,39 +1,51 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
-    exit();
-}
+include "config/db.php";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Dashboard</title>
+    <title>Volunteer</title>
 </head>
 <body>
-  <h2>Welcome, <?php echo $_SESSION['admin']; ?>!</h2>
-  <ul>
-    <li><a href="announcements.php">Manage Announcements</a></li>
-    <li><a href="events.php">Manage Events</a></li>
-    <li><a href="donations.php">View Donations</a></li>
-    <li><a href="volunteers.php">View Volunteers</a></li>
-    <li><a href="gallery.php">Manage Gallery</a></li>
-    <li><a href="prayer_times.php">Edit Prayer Times</a></li>
-    <li><a href="users.php">Users</a></li>
-    <li><a href="logout.php">Logout</a></li>
-  </ul>
-  <nav>
-    <ul>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="about.php">About</a></li>
-      <li><a href="announcements.php">Announcements</a></li>
-      <li><a href="donations.php">Donations</a></li>
-      <li><a href="volunteer.php">Volunteer</a></li>
-      <li><a href="gallery.php">Gallery</a></li>
-      <li><a href="contact.php">Contact</a></li>
-    </ul>
-  </nav>
-  <!-- Example internal link -->
-  <a href="volunteer.php">Become a Volunteer</a>
+    <h2>Volunteer for an Event</h2>
+
+    <?php if (!isset($_SESSION['user_id'])): ?>
+        <p>You must <a href="login.php">log in</a> to apply as a volunteer.</p>
+    <?php else: ?>
+        <?php
+        // Fetch events that allow volunteers
+        $today = date('Y-m-d H:i:s');
+        $stmt = $conn->prepare("SELECT id, title, date 
+                                FROM events 
+                                WHERE allow_volunteers = 1 
+                                  AND date >= ? 
+                                ORDER BY date ASC");
+        $stmt->bind_param("s", $today);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        ?>
+
+        <?php if ($result->num_rows === 0): ?>
+            <p>No events are currently accepting volunteers.</p>
+        <?php else: ?>
+            <form method="POST" action="volunteer_apply.php">
+                <label for="event_id">Choose Event:</label><br>
+                <select name="event_id" id="event_id" required>
+                    <option value="">-- Select an event --</option>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <option value="<?= $row['id'] ?>">
+                            <?= htmlspecialchars($row['title']) ?> (<?= $row['date'] ?>)
+                        </option>
+                    <?php endwhile; ?>
+                </select><br><br>
+
+                <label>Notes (optional):</label><br>
+                <textarea name="notes" rows="3" cols="40"></textarea><br><br>
+
+                <input type="submit" value="Apply as Volunteer">
+            </form>
+        <?php endif; ?>
+    <?php endif; ?>
 </body>
 </html>

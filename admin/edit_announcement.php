@@ -1,44 +1,35 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
-    exit();
-}
 include("../config/db.php");
 
-if (!isset($_GET['id'])) {
-    header("Location: announcements.php");
-    exit();
+$id = $_GET['id'];
+$result = mysqli_query($conn, "SELECT * FROM announcements WHERE id=$id");
+$announcement = mysqli_fetch_assoc($result);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = mysqli_real_escape_string($conn, $_POST['title']);
+    $content = mysqli_real_escape_string($conn, $_POST['content']);
+    $event_date = $_POST['event_date'];
+
+    $sql = "UPDATE announcements SET title='$title', content='$content', event_date='$event_date' WHERE id=$id";
+    if (mysqli_query($conn, $sql)) {
+        header("Location: announcements.php");
+        exit();
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
 }
-
-$id = intval($_GET['id']);
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $conn->real_escape_string($_POST['title']);
-    $content = $conn->real_escape_string($_POST['content']);
-    $conn->query("UPDATE announcements SET title='$title', content='$content' WHERE id=$id");
-    header("Location: announcements.php");
-    exit();
-}
-
-$result = $conn->query("SELECT * FROM announcements WHERE id=$id");
-$row = $result->fetch_assoc();
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Announcement</title>
-</head>
-<body>
-    <h2>Edit Announcement</h2>
-    <form method="POST" action="">
-        <label>Title:</label><br>
-        <input type="text" name="title" value="<?php echo htmlspecialchars($row['title']); ?>" required><br><br>
-        <label>Content:</label><br>
-        <textarea name="content" rows="5" cols="40" required><?php echo htmlspecialchars($row['content']); ?></textarea><br><br>
-        <input type="submit" value="Update Announcement">
-    </form>
-    <br>
-    <a href="announcements.php">Back to Announcements</a>
-</body>
-</html>
+
+<form method="POST">
+  <label>Title:</label><br>
+  <input type="text" name="title" value="<?php echo htmlspecialchars($announcement['title']); ?>" required><br><br>
+  
+  <label>Content:</label><br>
+  <textarea name="content" rows="5" required><?php echo htmlspecialchars($announcement['content']); ?></textarea><br><br>
+  
+  <label>Event Date:</label><br>
+  <input type="date" name="event_date" value="<?php echo $announcement['event_date']; ?>" required><br><br>
+  
+  <button type="submit">Update</button>
+</form>
