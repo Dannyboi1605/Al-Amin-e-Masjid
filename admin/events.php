@@ -12,9 +12,11 @@ include("../config/db.php");
 <html>
 <head>
     <title>Manage Events</title>
+      <?php include("includes/navbar.php"); ?>
 </head>
 <body>
     <h2>Events</h2>
+
     <a href="add_event.php">Add New Event</a>
     <table border="1" cellpadding="8" cellspacing="0">
         <tr>

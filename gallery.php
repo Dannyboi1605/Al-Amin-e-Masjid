@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-// Allow access only if user is logged in AND has role 'admin'
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
-    header("Location: ../login.php");
-    exit();
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

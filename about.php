@@ -1,100 +1,33 @@
-<?php
-session_start();
-
-// Allow access only if user is logged in AND has role 'admin'
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
-    header("Location: ../login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - Al-Amin E-Masjid</title>
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <title>About - Masjid Al-Amin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <?php include("includes/navbar.php"); ?>
-
-    <!-- About Section -->
-    <section class="container">
-    <h2>About Masjid Al-Amin</h2>
-    <div class="card">
-      <p>
-        Masjid Al-Amin is a central mosque located in <strong>Kampung Serigai, Putatan, Sabah</strong>.
-        It plays a vital role in serving the Muslim community by providing a place of worship,
-        organizing community events, and strengthening ties through religious and social activities.
-      </p>
+<div class="container py-5">
+    <h1 class="text-center mb-4">About</h1>
+    <div class="row text-center">
+        <div class="col-md-6 mb-3">
+            <a href="about_masjid.php" class="text-decoration-none">
+                <div class="card shadow-lg h-100">
+                    <div class="card-body d-flex align-items-center justify-content-center">
+                        <h3>About Masjid Al-Amin</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="org_chart.php" class="text-decoration-none">
+                <div class="card shadow-lg h-100">
+                    <div class="card-body d-flex align-items-center justify-content-center">
+                        <h3>Organization Chart</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
-
-    <h2>Vision & Mission</h2>
-    <div class="card">
-      <p><strong>Vision:</strong> To be a center of faith, unity, and community development in Putatan.</p>
-      <p><strong>Mission:</strong></p>
-      <ul>
-        <li>Provide a peaceful space for worship and spiritual growth.</li>
-        <li>Promote Islamic values through education and outreach.</li>
-        <li>Foster unity and support for all members of the community.</li>
-        <li>Encourage transparency and accessibility through digital platforms.</li>
-      </ul>
-    </div>
-
-    <h2>Leadership</h2>
-    <div class="card">
-      <p><strong>Imam:</strong> Ustaz [Insert Name]</p>
-      <p><strong>Committee Members:</strong> A team of dedicated individuals managing events, donations, and mosque administration.</p>
-    </div>
-
-    <h2>Community Role</h2>
-    <div class="card">
-      <p>
-        Beyond daily prayers, Masjid Al-Amin is actively engaged in <strong>charity, education, and outreach</strong>.
-        Programs include youth engagement, religious classes, and donation drives to support those in need.
-        The mosque aims to use its new website as a platform to enhance communication and foster inclusivity.
-      </p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Masjid Al-Amin, Kampung Serigai, Putatan, Sabah</p>
-  </footer>
-
-  <script>
-    const burger = document.getElementById('burger');
-    const navList = document.getElementById('nav-list');
-    burger.addEventListener('click', function() {
-      navList.classList.toggle('active');
-    });
-  </script>
-</body>
-</html>
-      <p><strong>Committee Members:</strong> A team of dedicated individuals managing events, donations, and mosque administration.</p>
-    </div>
-
-    <h2>Community Role</h2>
-    <div class="card">
-      <p>
-        Beyond daily prayers, Masjid Al-Amin is actively engaged in <strong>charity, education, and outreach</strong>.
-        Programs include youth engagement, religious classes, and donation drives to support those in need.
-        The mosque aims to use its new website as a platform to enhance communication and foster inclusivity.
-      </p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Masjid Al-Amin, Kampung Serigai, Putatan, Sabah</p>
-  </footer>
-
-  <script>
-    const burger = document.getElementById('burger');
-    const navList = document.getElementById('nav-list');
-    burger.addEventListener('click', function() {
-      navList.classList.toggle('active');
-    });
-  </script>
+</div>
 </body>
 </html>

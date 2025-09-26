@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h2>Add New Event</h2>
+      <?php include("includes/navbar.php"); ?>
     <form method="POST" action="">
         <label>Title:</label><br>
         <input type="text" name="title" required><br><br>

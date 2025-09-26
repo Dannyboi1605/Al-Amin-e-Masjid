@@ -24,6 +24,7 @@ $result = mysqli_query($conn, "SELECT * FROM announcements ORDER BY created_at D
   <meta charset="UTF-8">
   <title>Manage Announcements</title>
   <link rel="stylesheet" href="../css/styles.css">
+    <?php include("includes/navbar.php"); ?>
 </head>
 <body>
   <h2>Manage Announcements</h2>

@@ -33,6 +33,7 @@ $row = $result->fetch_assoc();
 <html>
 <head>
     <title>Edit Event</title>
+      <?php include("includes/navbar.php"); ?>
 </head>
 <body>
     <h2>Edit Event</h2>

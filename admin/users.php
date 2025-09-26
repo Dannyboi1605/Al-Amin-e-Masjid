@@ -20,6 +20,7 @@ if (isset($_GET['delete_id'])) {
 <html>
 <head>
     <title>Manage Users</title>
+      <?php include("includes/navbar.php"); ?>
 </head>
 <body>
     <h2>Registered Users</h2>

@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+  <?php include("includes/navbar.php"); ?>
 <form method="POST">
   <label>Title:</label><br>
   <input type="text" name="title" value="<?php echo htmlspecialchars($announcement['title']); ?>" required><br><br>

@@ -18,6 +18,7 @@ $event = $conn->query("SELECT title FROM events WHERE id=$event_id")->fetch_asso
 <html>
 <head>
     <title>Event Volunteers</title>
+      <?php include("includes/navbar.php"); ?>
 </head>
 <body>
     <h2>Volunteers for "<?php echo htmlspecialchars($event['title']); ?>"</h2>

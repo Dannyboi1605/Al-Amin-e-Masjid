@@ -24,6 +24,8 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>Volunteer Applications</title>
+
+      <?php include("includes/navbar.php"); ?>
     <style>
         table { border-collapse: collapse; width: 100%; }
         th, td { border: 1px solid #ddd; padding: 8px; }
